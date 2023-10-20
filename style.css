@@ -1,0 +1,90 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+.main-head {
+    background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsgbkLYgbTGcmkjiB7LgVRCMmdO_xcTkWAOg&usqp=CAU') center center fixed;
+    background-size:cover;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+.head h1 {
+    font-size: 36px;
+    margin: 0;
+}
+
+.form {
+    padding: 20px;
+}
+
+.main-form input.input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.input-btn {
+    background: #3498db;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.container {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.wrap {
+    color: white;
+    margin: 10px;
+}
+
+#location-box, #current-weather-head, #time, #temp, #text, #feels-like {
+    text-align: center;
+    margin: 10px;
+}
+
+#icon {
+    display: block;
+    margin: 0 auto;
+}
+
+
+@media (max-width: 768px) {
+    .main-head {
+        padding: 10px;
+    }
+
+    .head h1 {
+        font-size: 24px;
+    }
+
+    .form {
+        padding: 10px;
+    }
+
+    .main-form input.input {
+        font-size: 14px;
+    }
+
+    .input-btn {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+}
+
+
+
