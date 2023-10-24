@@ -2,58 +2,67 @@ const input = document.querySelector(".input");
 const form = document.querySelector(".main-form");
 const container = document.querySelector(".container");
 
-form.addEventListener('submit', (e) => {
+form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    container.innerHTML = '';
 
-    
     const apiKey = '7078015890994f95af535407231810';
     const city = input.value;
 
-    axios.get(`https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}`)
-        .then((res) => {
-            const data = res.data;
-            console.log(data);
-            const value = {
-                'Name': data.location.name,
-                'Region': data.location.region,
-                'Country': data.location.country,
-                'Text': data.current.condition.text,
-                'Icon': data.current.condition.icon,
-                'Temperature': data.current.temp_c,
-                'FeelsLike': data.current.feelslike_c,
-            };
-
+    try {
+        const res = await axios.get(`https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}`)
+        const data = res.data;
+        console.log(data);
+        container.innerHTML += `<div class="main-content">
+        
+            <div class="first-div">
+        <p class="name">${data.location.name}, ${data.location.region}, ${data.location.country}</p>
+            <p class="time">${data.location.localtime}</p>
+            </div>
             
-            const date = new Date().toLocaleDateString();
-            const time = new Date().toLocaleTimeString();
+            <p class="heading">Current Weather</p>
+            <div class="sec-div">
+            <div class="flex">
+                <img class="icon" src="${data.current.condition.icon}" width="120px"  height="120px">
+                <p class="temp">${data.current.temp_c}<sup class"unit">°C</sup></p>
+            </div>
+            <div>
+                <p class="text">${data.current.condition.text}</p>
+            </div>
+            </div>  
+                
+            
+            <div class="third-div">
+            <div>
+            <p class="head">Humidity</p>
+            <p>${data.current.humidity}</p>
+            </div>
+            <div>
+            <p class="head">FeelsLike</p>
+            <p>${data.current.feelslike_c}</p>
+            </div>
+            <div>
+            <p class="head">Gust</p>
+            <p>${data.current.gust_mph}</p>
+            </div>
+            <div>
+            <p class="head">Pressure</p>
+            <p>${data.current.pressure_in}</p>
+            </div>
+            <div>
+            <p class="head">Wind</p>
+            <p>${data.current.wind_mph}</p>
+            </div>
+            
 
-            container.style.color = "red";
-            container.innerHTML = `
-                <div id="weather-box" class="wrap">
-                    <div id="location-box" class="lf-padd">
-                        <div class="d-flex justify-between">
-                            <p> <i class="fa-solid fa-location-dot" style="color: #ffffff;"></i> &nbsp; ${value.Name}, ${value.Region}, ${value.Country}  </p>
-                            <p id="date">${date}</p>
-                        </div>
-                    </div>
-                    <div class="lf-padd">
-                        <p id="current-weather-head"> Current Weather </p>
-                        <p id="time">${time}</p>
-                    </div>
-                    <div class="d-flex gap">
-                        <div class="d-flex">
-                            <img id="icon" src="${value.Icon}" alt="icon" width="120px" height="120px">
-                            <p id="temp"> ${value.Temperature}<sup id="temp-unit">°C</sup> </p>
-                        </div>
-                        <div>
-                            <p id="text"> ${value.Text}</p>
-                            <p id="feels-like"> Feels Like &nbsp; ${value.FeelsLike}°</p>
-                        </div>
-                    </div>
-                </div>`;
-        })
-        .catch((err) => {
-            alert('Data not found');
-        });
+            </div>
+            <hr>
+            
+            
+            
+        </div>`;
+    } catch (error) {
+        alert('Data not found');
+    }
 });
+
+
